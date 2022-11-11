@@ -1,21 +1,21 @@
 resource "aws_dynamodb_table" "dynamodb-table" {
-  name           = "GameScores"
-  hash_key       = "UserId"
-  range_key      = "GameTitle"
+  name           = "Jobs"
+  hash_key       = "id"
+  range_key      = "title"    
   read_capacity  = "10"
   write_capacity = "10"
 
   attribute {
-    name = "UserId"
+    name = "id"
     type = "S"
   }
 
   attribute {
-    name = "GameTitle"
+    name = "title"
     type = "S"
   }
 
   tags = {
-    Name        = "dynamodb-table"
+    Name = "dynamodb-table"
   }
 }

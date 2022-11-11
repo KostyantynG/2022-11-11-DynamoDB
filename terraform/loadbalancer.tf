@@ -6,13 +6,13 @@ resource "aws_lb_target_group" "scaling_fastapi_target_group" {
   vpc_id   = aws_vpc.scaling_fastapi_vpc.id
 
   health_check {
-    path = "/"
-    port = 80
-    healthy_threshold = 6
+    path                = "/"
+    port                = 80
+    healthy_threshold   = 6
     unhealthy_threshold = 2
-    timeout = 2
-    interval = 10
-    matcher = "200"  # has to be HTTP 200 or fails
+    timeout             = 2
+    interval            = 10
+    matcher             = "200" # has to be HTTP 200 or fails
   }
 }
 
@@ -39,7 +39,7 @@ resource "aws_lb_listener" "scaling_fastapi_listener" {
 
 # Create Elastic IP
 resource "aws_eip" "nat_ip" {
-  vpc      = true
+  vpc = true
 }
 
 # Create NAT gateway
@@ -60,7 +60,7 @@ resource "aws_default_route_table" "private_route_table" {
   default_route_table_id = aws_vpc.scaling_fastapi_vpc.default_route_table_id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat.id
   }
 
