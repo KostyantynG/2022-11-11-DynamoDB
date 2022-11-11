@@ -1,3 +1,6 @@
 venv*
 terraform.tf*
 .terraform*
+*.zip
+python
+.*

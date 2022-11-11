@@ -4,7 +4,7 @@ import boto3
 
 url = "https://www.arbeitnow.com/api/job-board-api"
 s3_client = boto3.client('s3')
-bucket = "lambda-arbeitnow-challenge"
+bucket = "arbeitnow-job-bucket"
 
 def get_raw_jobs():    
     response = requests.get(url)

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-zip -r terraform/script.zip requirements.txt main.py
+zip -r script.zip requirements.txt main.py

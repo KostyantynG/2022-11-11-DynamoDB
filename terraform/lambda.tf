@@ -1,8 +1,14 @@
-# data "archive_file" "zip_the_python_code" {
-# type        = "zip"
-# source_dir  = "${path.module}/python/"
-# output_path = "${path.module}/python/lambda_func.zip"
-# }
+data "archive_file" "zip_the_python_code" {
+type        = "zip"
+source_file  = "${path.module}/lambda.py"
+output_path = "${path.module}/arbeitnow_func.zip"
+}
+
+data "archive_file" "zip_the_dependency" {
+type        = "zip"
+source_dir  = "${path.module}/python"
+output_path = "${path.module}/requests.zip"
+}
 
 resource "aws_lambda_function" "lambda_arbeitnow_func" {
   function_name = "arbeitnow"

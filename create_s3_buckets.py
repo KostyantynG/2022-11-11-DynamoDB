@@ -3,7 +3,7 @@ import boto3
 AWS_REGION = "us-west-2"
 client = boto3.client("s3", region_name=AWS_REGION)
 s3Res = boto3.resource("s3")
-bucket_name = "scaling-fastapi-bucket-1"
+bucket_name = "arbeitnow-job-bucket"
 bucket_name_backend = "scaling-fastapi-backend"
 location = {'LocationConstraint': AWS_REGION}
 
