@@ -3,31 +3,25 @@ import uvicorn
 import json
 import boto3
 
-client = boto3.client('dynamodb')
-response = client.query(
-    TableName='Jobs',
-    KeyConditions={
-        'string': {
-            'AttributeValueList': [
-                {
-                    'S': 'string'
-                }
-            ]
-        }
-    }
-)
-print(response)
-# dynamodb = boto3.resource('dynamodb')
-# table = dynamodb.Table('Jobs')
-# response = table.scan(
-#     FilterExpression='string',
-#     ExpressionAttributeValues={
+#client = boto3.client('dynamodb')
+# response = client.query(
+#     TableName='Jobs',
+#     KeyConditions={
 #         'string': {
-            
-#         },
+#             'AttributeValueList': [
+#                 {
+#                     'S': 'string'
+#                 }
+#             ]
+#         }
 #     }
 # )
-# data = response['Items']
+# print(response)
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('Jobs')
+response = table.scan(
+)
+jobs = response['Items']
 
 
 
@@ -55,25 +49,25 @@ print(response)
 # }
 
 # Create fastapi
-# app = FastAPI()
+app = FastAPI()
 
-# # Get health check (root directory)
-# @app.get("/")
-# def root():
-#     return {"Health check" : "OK"}
+# Get health check (root directory)
+@app.get("/")
+def root():
+    return {"Health check" : "OK"}
 
-# # Get list of jobs
-# @app.get("/job")
-# def list_jobs():
-#     return data
+# Get list of jobs
+@app.get("/job")
+def list_jobs():
+    return jobs
 
-# # # Get job by ID
-# # @app.get("/job/{job_id}")
-# # def get_by_id(job_id):
-# #     for job in jobs:
-# #         if job["id"] == job_id:
-# #             return job
+ # Get job by ID
+@app.get("/job/{job_id}")
+def get_by_id(job_id):
+    for job in jobs:
+        if job["id"] == job_id:
+            return job
 
-# # Run code with Python
-# if __name__ == "__main__":
-#    uvicorn.run(app, port=3000)
+# Run code with Python
+if __name__ == "__main__":
+   uvicorn.run(app, port=3000)

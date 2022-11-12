@@ -1,6 +1,6 @@
 # Create a Launch Template
 resource "aws_launch_template" "scaling_fastapi_template" {
-  name                                 = "scaling-fastapi-launch-template-tf"
+  # name                                 = "scaling-fastapi-launch-template-tf"
   image_id                             = "ami-0d593311db5abb72b"
   instance_initiated_shutdown_behavior = "terminate"
   instance_type                        = "t3.micro"
