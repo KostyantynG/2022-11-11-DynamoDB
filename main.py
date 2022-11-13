@@ -6,11 +6,11 @@ import boto3
 app = FastAPI()
 
 # Get list of jobs
-dynamodb = boto3.resource('dynamodb')
+dynamodb = boto3.resource('dynamodb', region_name='us-west-2')
 table = dynamodb.Table('Jobs')
-response = table.scan(
-)
+response = table.scan()
 jobs_list = response['Items']
+
 
 # Get health check (root directory)
 @app.get("/")

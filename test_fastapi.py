@@ -17,13 +17,6 @@ import boto3
 #     }
 # )
 # print(response)
-dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('Jobs')
-response = table.scan(
-)
-jobs = response['Items']
-
-
 
 # while 'LastEvaluatedKey' in response:
 #     response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
@@ -51,6 +44,12 @@ jobs = response['Items']
 # Create fastapi
 app = FastAPI()
 
+# Get list of jobs
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('Jobs')
+response = table.scan()
+jobs_list = response['Items']
+
 # Get health check (root directory)
 @app.get("/")
 def root():
@@ -59,12 +58,12 @@ def root():
 # Get list of jobs
 @app.get("/job")
 def list_jobs():
-    return jobs
+    return jobs_list
 
- # Get job by ID
+# Get job by ID
 @app.get("/job/{job_id}")
 def get_by_id(job_id):
-    for job in jobs:
+    for job in jobs_list:
         if job["id"] == job_id:
             return job
 
