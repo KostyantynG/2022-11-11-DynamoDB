@@ -1,72 +1,34 @@
-from fastapi import FastAPI
-import uvicorn
 import json
 import boto3
 
-#client = boto3.client('dynamodb')
-# response = client.query(
-#     TableName='Jobs',
-#     KeyConditions={
-#         'string': {
-#             'AttributeValueList': [
-#                 {
-#                     'S': 'string'
-#                 }
-#             ]
-#         }
-#     }
-# )
-# print(response)
-
-# while 'LastEvaluatedKey' in response:
-#     response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
-#     data.extend(response['Items'])
-# print(data)
-
-# response = table.query(
-#     TableName='Jobs',
-#     Key={
-#         'id': {'S': 'ausbildung-handelsfachwirt-in-jena-jysk-206765'},
-#         'title': {'S': 'AUSBILDUNG HANDELSFACHWIRT/IN (M/W/D) – Jena'}
-#     }
-# )
-
-# job_id = response['Item']['id']['S']
-# job_title = response['Item']['title']['S']
-# job_description = response['Item']['description']['S']
-
-# job_example = {
-#     "id" : job_id,
-#     "title" : job_title,
-#     "description" : job_description
-# }
-
-# Create fastapi
-app = FastAPI()
-
-# Get list of jobs
-dynamodb = boto3.resource('dynamodb')
+dynamodb = boto3.resource('dynamodb', region_name = 'us-west-2')
 table = dynamodb.Table('Jobs')
-response = table.scan()
-jobs_list = response['Items']
+response = table.query(
+    KeyConditions={
+        'id': {
+            'AttributeValueList': [
+                'id',
+                'head-of-it-horsemapp-gmbh-munich-300069'
+            ],
+            'ComparisonOperator': 'CONTAINS'
+        }
+    }
+)
+print(response)
+# def find_aws_job():
+#     for job in jobs_list:
+#         if job["description"] == "*aws*":
+#             print(job)
 
-# Get health check (root directory)
-@app.get("/")
-def root():
-    return {"Health check" : "OK"}
 
-# Get list of jobs
-@app.get("/job")
-def list_jobs():
-    return jobs_list
 
-# Get job by ID
-@app.get("/job/{job_id}")
-def get_by_id(job_id):
-    for job in jobs_list:
-        if job["id"] == job_id:
-            return job
-
-# Run code with Python
-if __name__ == "__main__":
-   uvicorn.run(app, port=3000)
+# def lambda_handler(event, context):
+#     client = boto3.client('sns')
+#     snsArn = 'arn:aws:sns:us-west-2:874515606678:aws_jobs_notifier'
+#     msg = 
+#     client.publish(
+#         TopicArn = snsArn,
+#         Message = msg,
+#         Subject='AWS job alert'
+#     )
+    

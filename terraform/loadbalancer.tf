@@ -10,7 +10,7 @@ resource "aws_lb_target_group" "scaling_fastapi_target_group" {
     port                = 80
     healthy_threshold   = 6
     unhealthy_threshold = 2
-    timeout             = 2
+    timeout             = 3
     interval            = 10
     matcher             = "200" # has to be HTTP 200 or fails
   }
