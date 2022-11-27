@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - gh_actions_workflow
 
 jobs:
   terraform:
