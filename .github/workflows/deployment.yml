@@ -28,3 +28,11 @@ jobs:
       - name: Copy code to bucket
         run: |
           aws s3 cp script.zip s3://arbeitnow-job-bucket/script.zip
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.1.7
+      - name: Deploy infrastructure
+        run: |
+          cd terraform
+          terraform init
+          terraform apply -auto-approve
