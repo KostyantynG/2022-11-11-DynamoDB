@@ -17,9 +17,9 @@ jobs:
       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
       AWS_REGION: 'us-west-2'
 
-steps:
-  - uses: actions/checkout@v2
-  - name: Create buckets
-    run: |
-      sh create_backend_bucket.sh
-      sh create_job_bucket.sh
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create buckets
+        run: |
+          sh create_backend_bucket.sh
+          sh create_job_bucket.sh
