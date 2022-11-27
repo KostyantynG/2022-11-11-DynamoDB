@@ -20,6 +20,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Create buckets
         run: |
-          aws s3 ls
-          bash create_backend_bucket.sh
-          bash create_job_bucket.sh
+          sh create_backend_bucket.sh
+          sh create_job_bucket.sh
+      - name: Zip code
+        run: |
+          sh zip_fastapi_code.sh
+      - name: Copy code to bucket
+        run: |
+          sh zip_fastapi_code.sh
