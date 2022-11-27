@@ -23,32 +23,32 @@ def upload_jobs_to_db():
             "description": job_api["description"]
         })
 
-# def get_jobs_list():
-#     raw_jobs = get_raw_jobs()
-#     jobs_list = []
-#     for job_api in raw_jobs:
-#         jobs_list.append({
-#             "id": job_api["slug"],
-#             "title": job_api["title"],
-#             "description": job_api["description"]
-#         })
-#     return jobs_list
+def get_jobs_list():
+    raw_jobs = get_raw_jobs()
+    jobs_list = []
+    for job_api in raw_jobs:
+        jobs_list.append({
+            "id": job_api["slug"],
+            "title": job_api["title"],
+            "description": job_api["description"]
+        })
+    return jobs_list
 
-# jobs_list = get_jobs_list()
+jobs_list = get_jobs_list()
 
-# def upload_job(job):
-#     job_string = json.dumps(job)
-#     job_bytes = str.encode(job_string)
-#     s3_client.put_object(
-#         Body = job_bytes,
-#         Bucket = bucket,
-#         Key = job["id"] + ".json"
-#     )
+def upload_job(job):
+    job_string = json.dumps(job)
+    job_bytes = str.encode(job_string)
+    s3_client.put_object(
+        Body = job_bytes,
+        Bucket = bucket,
+        Key = job["id"] + ".json"
+    )
 
-# def upload_jobs(jobs):
-#     for job in jobs:
-#         upload_job(job)
+def upload_jobs(jobs):
+    for job in jobs:
+        upload_job(job)
 
 def lambda_handler(event, context):
     upload_jobs_to_db()
-    # upload_jobs(jobs_list)
+    upload_jobs(jobs_list)
