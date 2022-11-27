@@ -30,6 +30,6 @@ jobs:
       - name: Deploy infrastructure
         run: |
           cd terraform
-          sh create_job_bucket.sh
+          sh create_backend_bucket.sh
           terraform init
           terraform apply -auto-approve
