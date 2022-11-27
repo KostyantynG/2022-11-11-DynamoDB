@@ -3,4 +3,4 @@ terraform.tf*
 .terraform*
 *.zip
 python
-.*
+.DS_Store
