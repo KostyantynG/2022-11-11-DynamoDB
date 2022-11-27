@@ -18,21 +18,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Create buckets
+      - name: Create source bucket
         run: |
-          sh create_backend_bucket.sh
           sh create_job_bucket.sh
-      - name: Zip code
-        run: |
-          sh zip_fastapi_code.sh
-      - name: Copy code to bucket
-        run: |
-          aws s3 cp script.zip s3://arbeitnow-job-bucket/script.zip
+      - name: build and upload src
+        run:  |
+          sh upload_src.sh
       - uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.1.7
       - name: Deploy infrastructure
         run: |
           cd terraform
+          sh create_job_bucket.sh
           terraform init
           terraform apply -auto-approve
