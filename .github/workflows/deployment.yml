@@ -27,4 +27,4 @@ jobs:
           sh zip_fastapi_code.sh
       - name: Copy code to bucket
         run: |
-          sh zip_fastapi_code.sh
+          aws s3 cp script.zip s3://arbeitnow-job-bucket/script.zip
