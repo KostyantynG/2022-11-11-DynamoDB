@@ -1,4 +1,4 @@
-resource "aws_dynamodb_table" "dynamodb-table" {
+resource "aws_dynamodb_table" "jobs-table" {
   name             = "Jobs"
   hash_key         = "id"
   read_capacity    = "10"

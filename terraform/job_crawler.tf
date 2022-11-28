@@ -9,7 +9,7 @@ resource "aws_lambda_function" "job_crawler" {
 
   environment {
     variables = {
-      JOBS_TABLE_NAME = aws_dynamodb_table.jobs.name
+      JOBS_TABLE_NAME = aws_dynamodb_table.jobs-table.name
     }
   }
 }
