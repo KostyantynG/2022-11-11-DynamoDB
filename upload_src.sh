@@ -23,8 +23,8 @@ cd ../..
 
 cd requests-layer
 pip3 install -r requirements.txt --target python/lib/python3.9/site-packages
-zip -r ../build/requests-layer.zip .
+zip -r ../build/requests_layer.zip .
 cd ..
 
 echo  "upload layer to s3"
-aws s3 cp build/requests-layer.zip s3://arbeitnow-job-bucket/
+aws s3 cp build/requests_layer.zip s3://arbeitnow-job-bucket/

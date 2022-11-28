@@ -49,6 +49,6 @@ def upload_jobs(jobs):
     for job in jobs:
         upload_job(job)
 
-def lambda_handler(event, context):
+def handler(event, context):
     upload_jobs_to_db()
     upload_jobs(jobs_list)
