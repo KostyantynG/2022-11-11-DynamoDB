@@ -13,6 +13,7 @@ resource "aws_lambda_function" "job_notifier" {
   }
 }
 
+
 resource "aws_sns_topic" "jobs_topic" {
   name = "jobstopic"
 }

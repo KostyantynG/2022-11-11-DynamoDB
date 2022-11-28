@@ -84,3 +84,18 @@ resource "aws_route_table_association" "public_rt_association_b" {
   subnet_id      = aws_subnet.public_subnet_b.id
   route_table_id = aws_route_table.public_rt.id
 }
+
+resource "aws_subnet" "name" {
+
+for_each = {
+  "management_a" = {vpc_id=aws_vpc.scaling_fastapi_vpc.id, cidr_block=["10.0.4.0/24"], availability_zone="us-west-2a"},
+  "management_b" = {vpc_id=aws_vpc.scaling_fastapi_vpc.id, cidr_block=["10.0.5.0/24"], availability_zone="us-west-2a"}
+}
+  vpc_id = each.value.vpc_id
+  cidr_block = each.value.cidr_block
+  availability_zone = each.value.availability_zone
+
+  tags={
+    Name = each.key
+  }
+}
