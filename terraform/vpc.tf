@@ -88,10 +88,10 @@ resource "aws_route_table_association" "public_rt_association_b" {
 resource "aws_subnet" "name" {
 
 for_each = {
-  "management_a" = {vpc_id=aws_vpc.scaling_fastapi_vpc.id, cidr-Block=["10.0.4.0/24"], availabilityZone="us-west-2a"},
-  "management_b" = {vpc_id=aws_vpc.scaling_fastapi_vpc.id, cidr-Block=["10.0.5.0/24"], availabilityZone="us-west-2b"}
+  "management_a" = {vpcid=aws_vpc.scaling_fastapi_vpc.id, cidr-Block=var.cidrBlock[0], availabilityZone="us-west-2a"},
+  "management_b" = {vpcid=aws_vpc.scaling_fastapi_vpc.id, cidr-Block=var.cidrBlock[1], availabilityZone="us-west-2b"}
 }
-  vpc_id = each.value.vpc_id
+  vpc_id = each.value.vpcid
   cidr_block = each.value.cidr-Block
   availability_zone = each.value.availabilityZone
 
