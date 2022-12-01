@@ -8,6 +8,6 @@ COPY src/main.py .
 
 RUN pip install -r requirements.txt
 
-EXPOSE 3000
+EXPOSE 80
 
 CMD ["python3", "main.py"]
